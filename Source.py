@@ -10,6 +10,8 @@ import math
 import random
 import numpy
 import os
+import matplotlib.pyplot as plt; plt.rcdefaults()
+import numpy as np
 import matplotlib.pyplot as pyplot
 
 random.seed(0)
@@ -60,7 +62,7 @@ class RedeNeural:
         # taxa de aprendizado
         self.taxa_aprendizado = 0.35
         # momentum Normalmente eh ajustada entre 0.5 e 0.9
-        self.momentum = 0.2
+        self.momentum = 0.25
 
         # activations for nodes 
         # cria uma matriz, preenchida com uns, de uma linha pela quantidade de nos
@@ -151,9 +153,36 @@ class RedeNeural:
         return erro
 
     def test(self, entradas_saidas):
+
+        acertos = 0
+
         for p in entradas_saidas:
             array = self.fase_forward(p[0])
             print("Entradas: " + str(p[0]) + ' - Saida encontrada/fase forward: ' + str(array[0]))
+
+            temp1 = array[0]*100
+
+            if(temp1>85 and p[1] == [1]):
+                acertos = acertos+1
+
+            if(temp1<=85 and p[1] == [0]):
+                acertos = acertos+1
+
+        acuracia = (acertos/4) * 100
+
+        print "Acuracia = %d POR CENTO"%acuracia
+
+        objects = ('Acertos', 'Erros')
+        y_pos = np.arange(len(objects))
+        performance = [100,0]
+         
+        plt.barh(y_pos, performance, align='center', alpha=0.5)
+        plt.yticks(y_pos, objects)
+        plt.xlabel('Acuracia em %')
+        plt.title('Acuracia da Rede Neural na Classificacao de Ataques DDoS')
+         
+        plt.show()
+        
 
     def treinar(self, entradas_saidas):
 
