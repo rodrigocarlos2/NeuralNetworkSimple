@@ -1,7 +1,6 @@
 
 
 
-
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # XOR Multilayer Perceptron usando BackPropagation
@@ -14,6 +13,7 @@ import math
 import random
 import numpy
 import os
+import matplotlib.pyplot as pyplot
 
 random.seed(0)
 
@@ -159,6 +159,11 @@ class RedeNeural:
             print("Entradas: " + str(p[0]) + ' - Saida encontrada/fase forward: ' + str(array[0]))
 
     def treinar(self, entradas_saidas):
+
+        a = [5,3,4,2,7,5,4,6,3,2]
+
+        i2 = 0
+
         for i in range(self.max_interacoes):
             erro = 0
             for p in entradas_saidas:
@@ -168,6 +173,21 @@ class RedeNeural:
                 erro = erro + self.fase_backward(saidas_desejadas)
             if i % 100 == 0:
                 print "Erro = %2.3f"%erro
+                a[i2] = float("{0:.3f}".format(erro))
+                i2 = i2+1
+
+        x = numpy.arange(10)
+
+        y = numpy.array(a)
+
+        fig = pyplot.figure()
+        ax = fig.add_subplot(111)
+        ax.set_ylim(0,1)
+        pyplot.plot(x,y)
+        for i,j in zip(x,y):
+            ax.annotate(str(j),xy=(i,j))
+
+        pyplot.show()
 
 
 def iniciar():
