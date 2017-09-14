@@ -1,13 +1,10 @@
 
-
-
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # XOR Multilayer Perceptron usando BackPropagation
 # 
-# Copyright (c) 2011, Antonio Rodrigo
-# All rights reserved.
-# Baseado no algoritmo de Neil Schemenauer <nas@arctrix.com>
+# Rodrigo Leal
+# Baseado no algoritmo de Neil Schemenauer
 
 import math
 import random
@@ -61,9 +58,9 @@ class RedeNeural:
         # quantidade maxima de interacoes
         self.max_interacoes = 1000
         # taxa de aprendizado
-        self.taxa_aprendizado = 0.5
+        self.taxa_aprendizado = 0.35
         # momentum Normalmente eh ajustada entre 0.5 e 0.9
-        self.momentum = 0.1
+        self.momentum = 0.2
 
         # activations for nodes 
         # cria uma matriz, preenchida com uns, de uma linha pela quantidade de nos
@@ -200,7 +197,7 @@ def iniciar():
     ]
 	
     # cria rede neural com duas entradas, duas ocultas e um no de saida    
-    n = RedeNeural(1, 2, 1)
+    n = RedeNeural(1, 4, 1)
     criar_linha()
     n.treinar(entradas_saidas)
     # testar
